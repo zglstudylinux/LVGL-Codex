@@ -21,6 +21,8 @@ function(lvgl_codex_configure_framework)
         message(FATAL_ERROR "Missing target LVGL configuration: ${_config_dir}/lv_conf.h")
     endif()
 
+    include("${ARG_APP_DIR}/app_manifest.cmake")
+
     lvgl_codex_resolve_lvgl("${ARG_SERIES}" _lvgl_version _lvgl_url _lvgl_sha256)
     message(STATUS "LVGL-Codex: ${ARG_TARGET}, LVGL v${_lvgl_version}")
 
@@ -81,8 +83,25 @@ function(lvgl_codex_configure_framework)
     if(ARG_TARGET STREQUAL "pc-sdl2")
         add_library(lvgl_codex_port STATIC
             "${LVGL_CODEX_ROOT}/ports/pc/sdl2/src/port_sdl2.c")
+        if(NOT DEFINED LVGL_CODEX_APP_PC_SDL2_WIDTH)
+            set(LVGL_CODEX_APP_PC_SDL2_WIDTH 800)
+        endif()
+        if(NOT DEFINED LVGL_CODEX_APP_PC_SDL2_HEIGHT)
+            set(LVGL_CODEX_APP_PC_SDL2_HEIGHT 480)
+        endif()
+        if(NOT DEFINED LVGL_CODEX_APP_PC_SDL2_TITLE)
+            set(LVGL_CODEX_APP_PC_SDL2_TITLE "LVGL-Codex - ${LVGL_CODEX_APP_ID}")
+        endif()
+        if(NOT LVGL_CODEX_APP_PC_SDL2_WIDTH MATCHES "^[1-9][0-9]*$" OR
+           NOT LVGL_CODEX_APP_PC_SDL2_HEIGHT MATCHES "^[1-9][0-9]*$")
+            message(FATAL_ERROR "PC SDL2 width and height in app_manifest.cmake must be positive integers.")
+        endif()
         target_include_directories(lvgl_codex_port PRIVATE
             "${LVGL_CODEX_ROOT}/framework/ports/include")
+        target_compile_definitions(lvgl_codex_port PRIVATE
+            LVGL_CODEX_PC_SDL2_WIDTH=${LVGL_CODEX_APP_PC_SDL2_WIDTH}
+            LVGL_CODEX_PC_SDL2_HEIGHT=${LVGL_CODEX_APP_PC_SDL2_HEIGHT}
+            LVGL_CODEX_PC_SDL2_TITLE=\"${LVGL_CODEX_APP_PC_SDL2_TITLE}\")
         target_link_libraries(lvgl_codex_port PUBLIC lvgl_codex_compat SDL2::SDL2)
     elseif(ARG_TARGET STREQUAL "linux-fbdev-evdev")
         add_library(lvgl_codex_port STATIC

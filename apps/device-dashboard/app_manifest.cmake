@@ -1,3 +1,6 @@
 set(LVGL_CODEX_APP_ID "device-dashboard")
 set(LVGL_CODEX_APP_LVGL_SERIES "9")
 set(LVGL_CODEX_APP_SUPPORTED_TARGETS "pc-sdl2;linux-fbdev-evdev")
+set(LVGL_CODEX_APP_PC_SDL2_WIDTH 800)
+set(LVGL_CODEX_APP_PC_SDL2_HEIGHT 480)
+set(LVGL_CODEX_APP_PC_SDL2_TITLE "LVGL-Codex - device-dashboard")
