@@ -51,6 +51,11 @@ function(lvgl_codex_configure_framework)
 
     if(ARG_TARGET STREQUAL "pc-sdl2")
         target_link_libraries(lvgl PUBLIC SDL2::SDL2)
+    elseif(ARG_TARGET STREQUAL "linux-fbdev-evdev")
+        # LVGL's fbdev and evdev drivers use clock_gettime(), CLOCK_MONOTONIC,
+        # and O_CLOEXEC.  Strict C11 mode on glibc hides those POSIX interfaces
+        # unless the feature-test macro is set before system headers are read.
+        target_compile_definitions(lvgl PRIVATE _POSIX_C_SOURCE=200809L)
     endif()
 
     add_library(lvgl_codex_compat INTERFACE)
