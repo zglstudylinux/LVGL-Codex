@@ -1,0 +1,11 @@
+# CMake build output
+/build/
+
+# CMake dependency downloads and test output
+/_deps/
+Testing/
+
+# IDE and local environment files
+/.vscode/
+/.idea/
+*.user

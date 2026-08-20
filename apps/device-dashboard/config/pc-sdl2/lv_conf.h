@@ -1,0 +1,17 @@
+#ifndef LV_CONF_H
+#define LV_CONF_H
+
+#define LV_COLOR_DEPTH 16
+#define LV_USE_OS LV_OS_NONE
+
+#define LV_USE_SDL 1
+#define LV_SDL_INCLUDE_PATH <SDL2/SDL.h>
+#define LV_SDL_RENDER_MODE LV_DISPLAY_RENDER_MODE_PARTIAL
+#define LV_SDL_BUF_COUNT 1
+#define LV_SDL_DIRECT_EXIT 1
+
+#define LV_USE_LOG 1
+#define LV_LOG_LEVEL LV_LOG_LEVEL_WARN
+#define LV_FONT_MONTSERRAT_20 1
+
+#endif /* LV_CONF_H */

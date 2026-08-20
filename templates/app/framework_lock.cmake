@@ -1,0 +1,4 @@
+set(LVGL_CODEX_FRAMEWORK_REPOSITORY "https://github.com/zglstudylinux/LVGL-Codex.git")
+set(LVGL_CODEX_FRAMEWORK_TAG "v0.1.0")
+set(LVGL_CODEX_LVGL_SERIES "9")
+set(LVGL_CODEX_LVGL_VERSION "9.5.0")
