@@ -16,6 +16,12 @@ Windows 首次安装 UCRT64 GCC、CMake、Ninja 和 SDL2：
 .\scripts\run-simulator.ps1
 ```
 
+启动 480×640 竖屏蓝牙音箱 Demo：
+
+```powershell
+.\scripts\run-simulator.ps1 -App bluetooth-speaker
+```
+
 首次上传到 GitHub 时，使用 `scripts/initialize-repository.ps1` 先合并远端已有的 `main` 历史；完整流程见 [Git 工作流](docs/WORKFLOW.md)。
 
 选择应用、目标和 LVGL 大版本的统一接口：

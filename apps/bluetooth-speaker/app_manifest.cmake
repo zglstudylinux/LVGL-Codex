@@ -1,0 +1,6 @@
+set(LVGL_CODEX_APP_ID "bluetooth-speaker")
+set(LVGL_CODEX_APP_LVGL_SERIES "9")
+set(LVGL_CODEX_APP_SUPPORTED_TARGETS "pc-sdl2;linux-fbdev-evdev")
+set(LVGL_CODEX_APP_PC_SDL2_WIDTH 480)
+set(LVGL_CODEX_APP_PC_SDL2_HEIGHT 640)
+set(LVGL_CODEX_APP_PC_SDL2_TITLE "LVGL-Codex - Bluetooth Speaker")

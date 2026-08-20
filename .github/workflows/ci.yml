@@ -9,6 +9,9 @@ on:
 jobs:
   windows-simulator:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        app: [device-dashboard, bluetooth-speaker]
     defaults:
       run:
         shell: msys2 {0}
@@ -24,19 +27,22 @@ jobs:
             mingw-w64-ucrt-x86_64-ninja
             mingw-w64-ucrt-x86_64-SDL2
       - run: >-
-          cmake -S . -B build/ci-windows -G Ninja
-          -DLVGL_APP=device-dashboard -DLVGL_TARGET=pc-sdl2 -DLVGL_SERIES=9
-      - run: cmake --build build/ci-windows
-      - run: ctest --test-dir build/ci-windows --output-on-failure
+          cmake -S . -B build/ci-windows-${{ matrix.app }} -G Ninja
+          -DLVGL_APP=${{ matrix.app }} -DLVGL_TARGET=pc-sdl2 -DLVGL_SERIES=9
+      - run: cmake --build build/ci-windows-${{ matrix.app }}
+      - run: ctest --test-dir build/ci-windows-${{ matrix.app }} --output-on-failure
 
   linux-fbdev-build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [device-dashboard, bluetooth-speaker]
     steps:
       - uses: actions/checkout@v4
       - name: Install build tools
         run: sudo apt-get update && sudo apt-get install -y build-essential cmake ninja-build
       - run: >-
-          cmake -S . -B build/ci-linux -G Ninja
-          -DLVGL_APP=device-dashboard -DLVGL_TARGET=linux-fbdev-evdev -DLVGL_SERIES=9
-      - run: cmake --build build/ci-linux
-      - run: ctest --test-dir build/ci-linux --output-on-failure
+          cmake -S . -B build/ci-linux-${{ matrix.app }} -G Ninja
+          -DLVGL_APP=${{ matrix.app }} -DLVGL_TARGET=linux-fbdev-evdev -DLVGL_SERIES=9
+      - run: cmake --build build/ci-linux-${{ matrix.app }}
+      - run: ctest --test-dir build/ci-linux-${{ matrix.app }} --output-on-failure
