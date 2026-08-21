@@ -54,4 +54,4 @@ cmake/      版本锁定与统一构建函数
 docs/       架构、移植、升级和协作规范
 ```
 
-详细约束见 [架构说明](docs/ARCHITECTURE.md)、[移植说明](docs/PORTING.md)、[LVGL 升级流程](docs/LVGL_UPGRADE.md) 与 [Git 工作流](docs/WORKFLOW.md)。
+详细约束见 [架构说明](docs/ARCHITECTURE.md)、[App 文档规范](docs/APP_DOCUMENTATION_STANDARD.md)、[移植说明](docs/PORTING.md)、[LVGL 升级流程](docs/LVGL_UPGRADE.md) 与 [Git 工作流](docs/WORKFLOW.md)。

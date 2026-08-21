@@ -7,6 +7,13 @@ on:
     branches: [main]
 
 jobs:
+  app-documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate application documentation
+        run: cmake -DLVGL_CODEX_ROOT="$GITHUB_WORKSPACE" -P cmake/ValidateAppDocs.cmake
+
   windows-simulator:
     runs-on: windows-latest
     strategy:

@@ -22,4 +22,4 @@ Get-ChildItem -LiteralPath $destination -File -Recurse | ForEach-Object {
     Set-Content -LiteralPath $_.FullName -Value $content -NoNewline
 }
 
-Write-Host "已创建 apps/$Name。先实现 domain/application/ui，再执行 scripts/build-simulator.ps1 -App $Name。"
+Write-Host "已创建 apps/$Name。请先在 README.md 替换应用边界、架构图和交互流程，再实现 domain/application/ui 并执行 scripts/build-simulator.ps1 -App $Name。"
