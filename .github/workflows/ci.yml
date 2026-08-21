@@ -18,7 +18,11 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        app: [device-dashboard, bluetooth-speaker]
+        include:
+          - app: device-dashboard
+            executable: device_dashboard.exe
+          - app: bluetooth-speaker
+            executable: bluetooth_speaker.exe
     defaults:
       run:
         shell: msys2 {0}
@@ -38,6 +42,18 @@ jobs:
           -DLVGL_APP=${{ matrix.app }} -DLVGL_TARGET=pc-sdl2 -DLVGL_SERIES=9
       - run: cmake --build build/ci-windows-${{ matrix.app }}
       - run: ctest --test-dir build/ci-windows-${{ matrix.app }} --output-on-failure
+      - name: Package Windows simulator
+        run: >-
+          mkdir -p dist/${{ matrix.app }} &&
+          cp build/ci-windows-${{ matrix.app }}/apps/${{ matrix.app }}/${{ matrix.executable }} dist/${{ matrix.app }}/ &&
+          cp /ucrt64/bin/SDL2.dll dist/${{ matrix.app }}/
+      - name: Upload Windows simulator
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-simulator-${{ matrix.app }}
+          path: dist/${{ matrix.app }}
+          if-no-files-found: error
+          retention-days: 14
 
   linux-fbdev-build:
     runs-on: ubuntu-latest
