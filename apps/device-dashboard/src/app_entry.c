@@ -2,6 +2,8 @@
 #include "dashboard_ui.h"
 #include "lvgl_codex/app.h"
 
+#include <stddef.h>
+
 static dashboard_controller_t controller;
 
 static void render_current_state(void)

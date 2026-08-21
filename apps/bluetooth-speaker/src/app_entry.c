@@ -2,6 +2,8 @@
 #include "speaker_ui.h"
 #include "lvgl_codex/app.h"
 
+#include <stddef.h>
+
 #include "lvgl.h"
 
 static speaker_controller_t controller;
